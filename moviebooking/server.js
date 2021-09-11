@@ -2,7 +2,7 @@ const express = require("express");
 const dbURL = require("./config/db.config");
 const app = express();
 const cors = require("cors");
-const PORT = 3000;
+const PORT = 5000;
 
 const db = require("./models");
 const genreRouter = require("./routes/genre.routes");
