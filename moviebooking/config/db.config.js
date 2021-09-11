@@ -1,2 +1,2 @@
-const dbURL = `mongodb://httplocalhost:27017/moviesdb`;
+const dbURL = "mongodb://localhost:27017/moviesdb";
 module.exports = dbURL;
