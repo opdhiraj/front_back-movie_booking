@@ -1,9 +1,24 @@
 const express = require("express");
 const dbURL = require("./config/db.config");
 const app = express();
+const cors = require("cors");
 const PORT = 3000;
 
 const db = require("./models");
+const genreRouter = require("./routes/genre.routes");
+const artistRouter = require("./routes/artist.routes");
+const movieRouter = require("./routes/movie.routes");
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    optionsSuccessStatus: 200,
+  })
+);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
@@ -16,20 +31,15 @@ db.mongoose
     console.log("Cannot connect to the database!", err);
     process.exit();
   });
-
 app.get("/", (req, res) => {
-  res.send("<h1>welcome</h1>");
+  res.json({
+    message: "Welcome to Upgrad Movie booking application development.",
+  });
 });
-app.get("/movies", (req, res) => {
-  res.send("All Movies Data in JSON format from Mongo DB");
-  r;
-});
-app.get("/genres", (req, res) => {
-  res.send("All Genres Data in JSON format from Mongo DB");
-});
-app.get("/artists", (req, res) => {
-  res.send("All Artists Data in JSON format from Mongo DB");
-});
+
+app.use("/api/genres", genreRouter);
+app.use("/api/artists", artistRouter);
+app.use("/api/movies", movieRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is listenning at ${PORT}`);
