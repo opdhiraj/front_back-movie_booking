@@ -8,6 +8,7 @@ const db = require("./models");
 const genreRouter = require("./routes/genre.routes");
 const artistRouter = require("./routes/artist.routes");
 const movieRouter = require("./routes/movie.routes");
+const userRouter = require("./routes/user.routes");
 
 app.use(
   cors({
@@ -40,6 +41,7 @@ app.get("/", (req, res) => {
 app.use("/api/genres", genreRouter);
 app.use("/api/artists", artistRouter);
 app.use("/api/movies", movieRouter);
+app.use("/api/auth", userRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is listenning at ${PORT}`);

@@ -39,10 +39,12 @@ module.exports = (mongoose) => {
     coupens: [],
     bookingRequests: [],
   });
+
   userSchema.pre("save", function (next) {
     this.username = this.first_name + this.last_name;
     next();
   });
+
   const User = mongoose.model("user", userSchema);
   return User;
 };
