@@ -34,7 +34,6 @@ async function signUp(req, res) {
 }
 
 async function login(req, res) {
-  //decrypt username and password by seperating the basic word
   try {
     const encodedAuth = req.headers["authorization"];
     const userNameAndPassword = atob(encodedAuth.split(" ")[1]);
@@ -60,7 +59,7 @@ async function login(req, res) {
           res.status(500).send(err.message || "login failed");
         });
     } else {
-      res.status(401).send("username and password dont match");
+      res.status(401).send("username and password do not match");
     }
   } catch (err) {
     res.status(500).send(err.message || "user not found");
